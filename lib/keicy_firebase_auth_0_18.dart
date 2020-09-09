@@ -11,7 +11,8 @@ class KeicyAuthentication {
   static KeicyAuthentication _instance = KeicyAuthentication();
   static KeicyAuthentication get instance => _instance;
 
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseAuth get firebaseAuth => _firebaseAuth;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     signInOption: SignInOption.standard,
