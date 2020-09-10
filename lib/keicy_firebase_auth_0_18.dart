@@ -150,7 +150,7 @@ class KeicyAuthentication {
     return;
   }
 
-  Future<Map<String, dynamic>> confirmPhoneVerification({String smsCode, String verificationId}) async {
+  Future<Map<String, dynamic>> confirmPhoneVerification({@required String smsCode, @required String verificationId}) async {
     try {
       PhoneAuthCredential _phoneAuthCredential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
       UserCredential userCredential = await _firebaseAuth.signInWithCredential(_phoneAuthCredential);
