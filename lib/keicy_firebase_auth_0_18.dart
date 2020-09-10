@@ -150,6 +150,30 @@ class KeicyAuthentication {
     return;
   }
 
+  Future<Map<String, dynamic>> confirmPhoneVerification({String smsCode, String verificationId}) async {
+    try {
+      PhoneAuthCredential _phoneAuthCredential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+      UserCredential userCredential = await _firebaseAuth.signInWithCredential(_phoneAuthCredential);
+      return {"state": true, "user": userCredential};
+    } on FirebaseAuthException catch (e) {
+      return {"state": false, "errorCode": e.code, "errorString": e.message};
+    } catch (e) {
+      List<String> list = e.toString().split(regExp);
+      String errorString = list[2];
+      String errorCode;
+      if (e.toString().contains("FirebaseError")) {
+        errorCode = list[4];
+      } else {
+        errorCode = list[2];
+      }
+
+      ///   --- Error Codes ---
+      /// ERROR_USER_NOT_FOUND, ERROR_WRONG_PASSWORD,ERROR_NETWORK_REQUEST_FAILED
+      ///
+      return {"state": false, "errorCode": errorCode, "errorString": errorString};
+    }
+  }
+
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
   }
