@@ -48,7 +48,7 @@ class KeicyAuthentication {
 
   Future<Map<String, dynamic>> signUp({@required String email, @required String password}) async {
     try {
-      UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       return {"state": true, "user": userCredential};
     } on FirebaseAuthException catch (e) {
       return {"state": false, "errorCode": e.code, "errorString": e.message};
