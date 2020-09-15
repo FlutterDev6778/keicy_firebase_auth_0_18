@@ -17,3 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 ## update 2020-09-10
 
 add Phone verificatiohn code in here.
+
+## update 2020-09-15
+
+changed return type.
